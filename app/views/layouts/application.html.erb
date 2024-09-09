@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List Tool</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body class="bg-whiten">
+<!-- ===== Preloader Start ===== -->
+<include src="./partials/preloader.html"></include>
+<!-- ===== Preloader End ===== -->
+
+<!-- ===== Page Wrapper Start ===== -->
+<div class="flex h-screen overflow-hidden">
+  <!-- ===== Sidebar Start ===== -->
+    <div class="absolute left-0 top-0 z-1000 flex h-screen w-1/6 flex-col overflow-y-hidden duration-300 ease-linear
+                lg:static lg:translate-x-0 -translate-x-full bg-black">
+      <%= render 'layouts/sidebar' %>
+    </div>
+
+  <!-- ===== Sidebar End ===== -->
+
+      <!-- ===== Content Area Start ===== -->
+      <div
+        class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
+      >
+        <!-- ===== Header Start ===== -->
+          <div class="z-10">
+            <%= render 'layouts/header' %>
+          </div>
+
+        <!-- ===== Header End ===== -->
+
+        <!-- ===== Main Content Start ===== -->
+        <main class="z-0 relative min-h-[calc(100vh-64px)]">
+          <%= yield %>
+        </main>
+        <!-- ===== Main Content End ===== -->
+      </div>
+      <!-- ===== Content Area End ===== -->
+    </div>
+  </div>
+  <!-- ===== Content Area End ===== -->
+</div>
+<!-- ===== Page Wrapper End ===== -->
+</body>
+</html>

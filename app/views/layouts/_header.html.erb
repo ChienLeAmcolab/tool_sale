@@ -1,0 +1,100 @@
+<header
+  class="sticky top-0 z-1200 flex w-full bg-white shadow-xl text-black h-16"
+>
+  <div
+    class="flex flex-auto justify-end items-center py-4 shadow-2 md:px-6 2xl:px-11"
+  >
+    <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
+      <!-- Hamburger Toggle BTN -->
+
+      <button
+        class="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-stroked ark dark:bg-box dark lg:hidden"
+      >
+        <span class="relative block h-5.5 w-5.5 cursor-pointer">
+          <span class="du-block absolute right-0 h-full w-full">
+            <span
+              class="relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white"
+            ></span>
+            <span
+              class="relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white"
+            ></span>
+            <span
+              class="relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white"
+            ></span>
+          </span>
+          <span class="du-block absolute right-0 h-full w-full rotate-45">
+            <span
+              class="absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white"
+            ></span>
+            <span
+              class="delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white"
+            ></span>
+          </span>
+        </span>
+      </button>
+      <!-- Hamburger Toggle BTN -->
+      <a class="block flex-shrink-0 lg:hidden" href="index.html">
+<!--        <img src="./images/logo/logo-icon.svg" alt="Logo" />-->
+      </a>
+    </div>
+    <div class="hidden sm:block">
+    </div>
+
+    <div class="flex items-center gap-3 2xsm:gap-7">
+      <!-- Item Area -->
+      <div
+        class="relative"
+      >
+        <div
+          class="flex items-center gap-4"
+          href="#"
+        >
+          <a href="">
+            <span class="hidden text-right lg:block ">
+              <span class="block text-sm font-medium text-black hover:text-cyan-500"
+              > <i class="fa fa-user-circle"></i> 森 勇斗 @ 1540491</span
+              >
+            </span>
+          </a>
+
+          <span class="hidden text-right lg:block ">
+            <span class="block text-sm font-medium text-black hover:text-cyan-500"
+            ><i class="fa fa-file" ></i>マニュアル</span
+            >
+
+          </span>
+
+          <span class="hidden text-right lg:block" >
+            <button class="block text-sm font-medium text-black hover:text-cyan-500"
+                    id="dropdownDefaultButton" data-dropdown-toggle="dropdown" data-dropdown-trigger="hover"
+            ><i class="fa fa-cog"></i>設定</button
+            >
+
+          </span>
+          
+          <span class="hidden text-right lg:block">
+
+              <span class="block text-sm font-medium text-black hover:text-cyan-500"><i class="fa fa-sign-out"></i>ログアウト</span>
+
+          </span>
+          
+
+          <!-- Dropdown menu -->
+          <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg drop-shadow-lg w-44 mt-4">
+            <ul class="p-3">
+              <li><%= link_to "契約情報", "", class: "hover:text-blue-950" %></li>
+              <hr>
+              <li><a class="hover:text-blue-950"  href="">アカウント管理</a></li>
+              <hr>
+              <li><%= link_to "基本情報設定", "", class: "hover:text-blue-950" %></li>
+              <hr>
+              <li><%= link_to "アカウント設定", "", class: "hover:text-blue-950" %></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Dropdown End -->
+      </div>
+      <!-- User Area -->
+    </div>
+  </div>
+</header>

@@ -1,0 +1,36 @@
+<div class="p-10 bg-white shadow-md rounded-md pe-40">
+  <h2 class="text-lg font-semibold text-gray-800 mb-4">All job crawl</h2>
+  <%= button_to "Delete All Jobs", destroy_all_job_index_path,
+                method: :delete, data: { turbo_confirm: "Are you sure you want to delete all jobs?" },
+                class: "px-4 py-2 mb-5 bg-red-600 text-black text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500" %>
+  <table class="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
+    <thead class="text-xs text-white uppercase bg-blue-600">
+    <tr>
+      <th scope="col" class="px-6 py-3 w-1/12">
+        Job ID
+      </th>
+      <th scope="col" class="px-6 py-3 w-3/12">
+        Job Prompt
+      </th>
+      <th scope="col" class="px-6 py-3 w-8/12">
+        Job Reply
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @jobs.each do |result| %>
+      <tr class="bg-blue-200 border-b border-blue-400">
+        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap hover:bg-white">
+          <%= result.job_page_id%>
+        </th>
+        <td class="px-6 py-4 text-black hover:bg-white" style="white-space: pre-wrap;">
+          <%= result.gpt_prompt %>
+        </td>
+        <td class="px-6 py-4 text-black hover:bg-white" style="white-space: pre-wrap;">
+          <%= result.gpt_reply %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

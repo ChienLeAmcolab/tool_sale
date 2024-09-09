@@ -1,0 +1,113 @@
+<div class="p-10 bg-white shadow-md rounded-md pe-60">
+  <h2 class="text-lg font-semibold text-gray-800 mb-4">Channels Setting</h2>
+  <div id="success-toast" class="toast hidden"></div>
+  <!-- app/views/some_view.html.erb -->
+
+  <!-- Form Start -->
+  <!-- Channel Tabs -->
+  <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 mb-4">
+    <li class="mr-2">
+      <a href="#" class="inline-block px-4 py-3 text-white bg-teal-600 rounded-lg active" aria-current="page">Crowdworks</a>
+    </li>
+    <li class="mr-2">
+      <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100">Lancers</a>
+    </li>
+    <li class="mr-2">
+      <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100">xxx</a>
+    </li>
+    <li class="mr-2">
+      <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100">xxx</a>
+    </li>
+    <li>
+      <a class="inline-block px-4 py-3 text-gray-400 cursor-not-allowed">yyy</a>
+    </li>
+  </ul>
+
+  <!-- Active Setting -->
+  <%= form_with model: @system_setting, url: toggle_apply_render_channel_setting_index_path, method: :get, data: { controller: "system-setting" }, local: true do |f| %>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Active setting</label>
+      <label class="inline-flex items-center cursor-pointer">
+        <%= f.check_box :status, class: "sr-only peer", data: { action: "change->systemSetting#toggle", controller: "systemSetting"} %>
+        <div class="relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-teal-300 dark:peer-focus:ring-teal-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-teal-600"></div>
+        <span class="ml-3 text-sm font-medium text-black">ACTIVE</span>
+      </label>
+    </div>
+    <div>
+      <%= f.submit "Save", id: "submit-button", class: "hidden" %>
+    </div>
+  <% end %>
+
+  <%= form_with url: channel_setting_index_path, method: :post, local: true do |f| %>
+    <!-- Crawl Link -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-5">Crawl Link</label>
+      <div class="flex space-x-4 mb-5">
+        <%= f.text_field :crawl_link, value: "https://crowdworks.jp/watchlist/job_offers?ref=login_header", class: "flex-grow px-4 py-2 ms-4 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none", disabled: true  %>
+      </div>
+      <div id="input_craw"></div>
+      <button data-action="click->addCrawLink#addCrawLink" data-controller="addCrawLink" class="px-4 ms-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none">Add</button>
+    </div>
+
+    <!-- Apply Prompt -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Apply Prompt</label>
+      <div class="flex space-x-4">
+        <%= f.text_area :apply_prompt, placeholder: "GPT Prompt Value", class: "w-full ms-4 mt-2 px-2 py-1 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none",
+                        value: @last_info&.apply_prompt %>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Account Information</label>
+      <div class="flex space-x-4">
+        <div class="flex-1">
+          <%= f.text_field :email, placeholder: "Email Account", class: "w-full ms-4 px-2 py-1 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none",
+                           value: @last_info&.email %>
+
+        </div>
+        <div class="flex-1">
+          <%= f.password_field :password, placeholder: "Password Account", class: "w-full ms-4 px-2 py-1 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none",
+                               value: @last_info&.password %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parameter -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Parameter</label>
+      <table id="parameter-table" class="min-w-full bg-white">
+        <thead>
+        <tr>
+          <th class="py-2 px-4 border-b">Parameter Name</th>
+          <th class="py-2 px-4 border-b">Parameter Value</th>
+        </tr>
+        </thead>
+        <tbody id="parameter-table">
+        <tr>
+          <td class="py-2 px-4 border-b">
+            <%= f.text_field "parameters[][name]", class: "w-full px-2 py-1 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none", placeholder: "Parameter Name" %>
+          </td>
+          <td class="py-2 px-4 border-b">
+            <%= f.text_field "parameters[][value]", class: "w-full px-2 py-1 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none", placeholder: "Parameter Value" %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <button data-action="click->parameter#addParameter" data-controller="parameter" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none">Add
+        Parameter
+      </button>
+    </div>
+
+    <!-- Submit Button -->
+    <div data-controller="progress" data-progress-url-value="<%= show_progress_channel_setting_index_path %>"
+         id="process">
+      <div class="progress-bar-container" style="width: 100%; background-color: #f0f0f0; border-radius: 4px; overflow: hidden;">
+        <div data-progress-target="progressBar" class="progress-bar" style="width: 0%; height: 20px; background-color: #4caf50;"></div>
+      </div>
+      <div data-progress-target="percentage" style="margin-top: 5px;">0%</div>
+      <%= f.submit "RUN", class: "px-4 py-2 bg-teal-600 text-white rounded-md focus:outline-none cursor-pointer",
+                   data: { action: "click->progress#startPolling" } %>
+    </div>
+  <% end %>
+  <!-- Form End -->
+</div>
