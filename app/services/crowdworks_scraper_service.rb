@@ -9,7 +9,7 @@ class CrowdworksScraperService
   end
 
   def perform(apply_prompt)
-    browser = Watir::Browser.new
+    browser = Watir::Browser.new :chrome, headless: true
     File.write('progress.txt', 5.0)
     begin
       sleep 0.5
