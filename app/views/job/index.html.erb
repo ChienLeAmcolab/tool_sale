@@ -7,12 +7,9 @@
     <thead class="text-xs text-white uppercase bg-blue-600">
     <tr>
       <th scope="col" class="px-6 py-3 w-1/12">
-        Job ID
+        Job Link
       </th>
-      <th scope="col" class="px-6 py-3 w-3/12">
-        Job Prompt
-      </th>
-      <th scope="col" class="px-6 py-3 w-8/12">
+      <th scope="col" class="px-6 py-3 w-11/12">
         Job Reply
       </th>
     </tr>
@@ -20,12 +17,9 @@
     <tbody>
     <% @jobs.each do |result| %>
       <tr class="bg-blue-200 border-b border-blue-400">
-        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap hover:bg-white">
-          <%= result.job_page_id%>
+        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap hover:bg-white underline">
+          <a href="<%= result.job_page_link %>">  <%= result.job_page_link%> </a>
         </th>
-        <td class="px-6 py-4 text-black hover:bg-white" style="white-space: pre-wrap;">
-          <%= result.gpt_prompt %>
-        </td>
         <td class="px-6 py-4 text-black hover:bg-white" style="white-space: pre-wrap;">
           <%= result.gpt_reply %>
         </td>

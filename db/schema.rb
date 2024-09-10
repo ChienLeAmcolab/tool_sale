@@ -20,13 +20,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_06_025450) do
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.integer "job_page_id", null: false
+    t.text "job_page_link", null: false
     t.text "gpt_prompt"
     t.text "gpt_reply"
     t.integer "status", default: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["job_page_id"], name: "index_jobs_on_job_page_id", unique: true
+    t.index ["job_page_link"], name: "index_jobs_on_job_page_link", unique: true
   end
 
   create_table "system_settings", force: :cascade do |t|

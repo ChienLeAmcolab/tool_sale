@@ -10,7 +10,7 @@ export default class extends Controller {
 
   startPolling() {
     if (this.timer) return;
-    this.showToast("The process is running...", "#4caf50", null);
+    this.showToast("The process is running...", "#1D9488", null, "progress-toast");
     this.updateProgress();
     this.timer = setInterval(() => {
       this.updateProgress();
@@ -35,7 +35,7 @@ export default class extends Controller {
       if (progress >= 100) {
         this.closeToast()
         this.stopPolling()
-        this.showToast("The process is complete.", "#4caf50");
+        this.showToast("The process is complete.", "#4caf50", 3000);
         await this.resetProgress();
       }
     } catch (error) {
@@ -46,13 +46,18 @@ export default class extends Controller {
   async resetProgress() {
     try {
       const resetUrl = '/channel_setting/reset_progress';
-
+      const toast = document.querySelector('.toast')
+      toast.classList.remove('progress-toast')
       const response = await fetch(resetUrl, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
       });
+      setTimeout(() => {
+        this.progressBarTarget.style.width = `0%`
+        this.percentageTarget.textContent = `0%`
+      }, 3000)
 
       if (!response.ok) {
         throw new Error('Failed to reset progress');
@@ -62,14 +67,17 @@ export default class extends Controller {
     }
   }
 
-  showToast(message, color, duration = 3000) {
+  showToast(message, color, duration = 3000, custom_class = '') {
     const toast = document.getElementById('success-toast');
     toast.textContent = message;
     toast.style.setProperty('--toast-bg-color', color);
     toast.classList.remove('hidden');
     toast.classList.add('show');
 
-    // Nếu duration không phải là null hoặc undefined, đóng toast sau duration
+    if (custom_class) {
+      toast.classList.add(custom_class);
+    }
+
     if (duration) {
       setTimeout(() => {
         this.closeToast();

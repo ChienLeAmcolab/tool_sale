@@ -81,7 +81,7 @@ class CrowdworksScraperService
         sleep 0.2
         browser.textarea(id: 'proposal_conditions_attributes_0_message_attributes_body').wait_until(&:present?).set(gpt_reply)
 
-        job_record = Job.find_or_initialize_by(job_page_id: job[:job_id])
+        job_record = Job.find_or_initialize_by(job_page_link: job_link_public)
 
         job_record.assign_attributes(
           gpt_prompt: gpt_prompt,

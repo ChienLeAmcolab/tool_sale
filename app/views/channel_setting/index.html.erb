@@ -62,12 +62,12 @@
       <div class="flex space-x-4">
         <div class="flex-1">
           <%= f.text_field :email, placeholder: "Email Account", class: "w-full ms-4 px-2 py-1 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none",
-                           value: @last_info&.email %>
+                           value: @last_info&.email, required: true %>
 
         </div>
         <div class="flex-1">
           <%= f.password_field :password, placeholder: "Password Account", class: "w-full ms-4 px-2 py-1 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none",
-                               value: @last_info&.password %>
+                               value: @last_info&.password, required: true %>
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
     <div data-controller="progress" data-progress-url-value="<%= show_progress_channel_setting_index_path %>"
          id="process">
       <div class="progress-bar-container" style="width: 100%; background-color: #f0f0f0; border-radius: 4px; overflow: hidden;">
-        <div data-progress-target="progressBar" class="progress-bar" style="width: 0%; height: 20px; background-color: #4caf50;"></div>
+        <div data-progress-target="progressBar" class="progress-bar" style="width: 0%; height: 30px"></div>
       </div>
       <div data-progress-target="percentage" style="margin-top: 5px;">0%</div>
       <%= f.submit "RUN", class: "px-4 py-2 bg-teal-600 text-white rounded-md focus:outline-none cursor-pointer",
